@@ -8,7 +8,7 @@ class Game extends Component {
     this.state = {
       gameScore1: gamePoints[0],
       gameScore2: gamePoints[0],
-      test: 0
+      // test1: 0
     };
   }
 
