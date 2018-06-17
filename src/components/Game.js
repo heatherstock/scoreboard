@@ -12,17 +12,20 @@ class Game extends Component {
     };
   }
 
-  click = () => {
-    this.setState({ test: this.state.test + 1 });
+  update1 = () => {
+    this.setState({ gameScore1: gamePoints[1] });
+  }
+
+  update2 = () => {
+    this.setState({ gameScore2: gamePoints[2] })
   }
 
   render() {
-    console.log(this.state.test)
     return (
       <div>
         <h2>Game</h2>
-        <Player name={1} gameScore={this.state.gameScore1} click={this.click}/>
-        <Player name={2} gameScore={this.state.gameScore2} click={this.click}/>
+        <Player name={1} gameScore={this.state.gameScore1} click={this.update1}/>
+        <Player name={2} gameScore={this.state.gameScore2} click={this.update2}/>
       </div>
     );
   };
