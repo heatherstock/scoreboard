@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Player from './Player';
+import { gamePoints } from '../logic/logic';
 
 class Game extends Component {
   constructor() {
     super();
     this.state = {
-      gameScore1: 0,
-      gameScore2: 0
+      gameScore1: gamePoints[0],
+      gameScore2: gamePoints[0]
     };
   }
 

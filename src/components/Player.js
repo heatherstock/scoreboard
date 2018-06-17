@@ -2,7 +2,9 @@ import React from 'react';
 
 const Player = ({ name, gameScore }) => {
   return (
-    <h3>Player {name}: {gameScore}</h3>
+    <div>
+      <h3>Player {name}: {gameScore}</h3>
+    </div>
   )
 }
 
