@@ -11,23 +11,19 @@ class Game extends Component {
     };
   }
 
-  update1 = () => {
-    let index = gamePoints.indexOf(this.state.gameScore1);
-    this.setState({ gameScore1: gamePoints[index + 1] });
-  }
 
-  update2 = () => {
-    let index = gamePoints.indexOf(this.state.gameScore2);
-    this.setState({ gameScore2: gamePoints[index + 1] });
+
+  scorePoint = (name) => {
+    let index = gamePoints.indexOf(this.state['gameScore' + name]);
+    this.setState({ ['gameScore' + name]: gamePoints[index + 1] });
   }
 
   render() {
-    // console.log(gamePoints.indexOf(this.state.gameScore1));
     return (
       <div>
         <h2>Game</h2>
-        <Player name={1} gameScore={this.state.gameScore1} click={this.update1}/>
-        <Player name={2} gameScore={this.state.gameScore2} click={this.update2}/>
+        <Player name={1} gameScore={this.state.gameScore1} click={this.scorePoint} />
+        <Player name={2} gameScore={this.state.gameScore2} click={this.scorePoint} />
       </div>
     );
   };
