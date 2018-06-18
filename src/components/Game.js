@@ -7,20 +7,22 @@ class Game extends Component {
     super();
     this.state = {
       gameScore1: gamePoints[0],
-      gameScore2: gamePoints[0],
-      // test1: 0
+      gameScore2: gamePoints[0]
     };
   }
 
   update1 = () => {
-    this.setState({ gameScore1: gamePoints[1] });
+    let index = gamePoints.indexOf(this.state.gameScore1);
+    this.setState({ gameScore1: gamePoints[index + 1] });
   }
 
   update2 = () => {
-    this.setState({ gameScore2: gamePoints[2] })
+    let index = gamePoints.indexOf(this.state.gameScore2);
+    this.setState({ gameScore2: gamePoints[index + 1] });
   }
 
   render() {
+    // console.log(gamePoints.indexOf(this.state.gameScore1));
     return (
       <div>
         <h2>Game</h2>
