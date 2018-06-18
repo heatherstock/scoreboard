@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Player from './Player';
-import { gamePoints } from '../logic/logic';
+import { gamePoints, computeScore } from '../logic/logic';
 
 class Game extends Component {
   constructor() {
@@ -11,11 +11,16 @@ class Game extends Component {
     };
   }
 
-
-
   scorePoint = (name) => {
-    let index = gamePoints.indexOf(this.state['gameScore' + name]);
-    this.setState({ ['gameScore' + name]: gamePoints[index + 1] });
+    
+    const rename = computeScore(this.state['gameScore' + name], name);
+    // this.setState(result);
+    console.log(rename);
+    // if (this.state.gameScore1 === this.state.gameScore) {
+
+    // }
+    // let index = gamePoints.indexOf(this.state['gameScore' + name]);
+    // this.setState({ ['gameScore' + name]: gamePoints[index + 1] });
   }
 
   render() {
