@@ -12,16 +12,9 @@ class Game extends Component {
   }
 
   scorePoint = (name) => {
-    
-    const rename = computeScore(this.state['gameScore' + name], name);
-    // this.setState(result);
-    console.log(rename);
-    // if (this.state.gameScore1 === this.state.gameScore) {
-
-    // }
-    // let index = gamePoints.indexOf(this.state['gameScore' + name]);
-    // this.setState({ ['gameScore' + name]: gamePoints[index + 1] });
-  }
+    const updatedPoints = computeScore(this.state['gameScore' + name]);
+    this.setState({ ['gameScore' + name]: updatedPoints });
+  }  
 
   render() {
     return (
