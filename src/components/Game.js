@@ -12,7 +12,7 @@ class Game extends Component {
   }
 
   scorePoint = (name) => {
-    const updatedPoints = computeScore(this.state['gameScore' + name]);
+    const updatedPoints = computeScore(this.state['gameScore' + name], this.state.gameScore1, this.state.gameScore2);
     this.setState({ ['gameScore' + name]: updatedPoints });
   }  
 
