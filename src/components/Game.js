@@ -6,22 +6,22 @@ class Game extends Component {
   constructor() {
     super();
     this.state = {
-      gameScore1: gamePoints[0],
-      gameScore2: gamePoints[0]
+      player1: gamePoints[0],
+      player2: gamePoints[0]
     };
   }
 
-  scorePoint = (name) => {
-    const updatedPoints = computeScore(this.state['gameScore' + name], this.state.gameScore1, this.state.gameScore2);
-    this.setState({ ['gameScore' + name]: updatedPoints });
+  scorePoint = (player, opposition) => {
+    const updatedPoints = computeScore(this.state['player' + player], this.state['player' + opposition]);
+    this.setState({ ['player' + player]: updatedPoints });
   }  
 
   render() {
     return (
       <div>
         <h2>Game</h2>
-        <Player name={1} gameScore={this.state.gameScore1} click={this.scorePoint} />
-        <Player name={2} gameScore={this.state.gameScore2} click={this.scorePoint} />
+        <Player player={1} opposition={2} gameScore={this.state.player1} click={this.scorePoint} />
+        <Player player={2} opposition={1} gameScore={this.state.player2} click={this.scorePoint} />
       </div>
     );
   };
