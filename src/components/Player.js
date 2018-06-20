@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Player = ({ name, gameScore, click }) => {
+const Player = ({ name, opposition,  gameScore, click }) => {
   return (
     <div>
       <h3>Player {name}: {gameScore}</h3>
-      <button id={name} onClick={() => click(name)}>Score</button>
+      <button id={name} onClick={() => click(name, opposition)}>Score</button>
     </div>
   )
 }
