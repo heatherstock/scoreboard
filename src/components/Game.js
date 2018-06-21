@@ -12,8 +12,8 @@ class Game extends Component {
   }
 
   scorePoint = (player, opposition) => {
-    const updatedPoints = computeScore(this.state['player' + player], this.state['player' + opposition]);
-    this.setState({ ['player' + player]: updatedPoints });
+    const updatedPoints = computeScore(player, opposition, this.state['player' + player], this.state['player' + opposition]);
+    this.setState(updatedPoints);
   }  
 
   render() {

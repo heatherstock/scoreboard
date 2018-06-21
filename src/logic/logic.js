@@ -1,28 +1,35 @@
 export const gamePoints = [0, 15, 30, 40, 'ADVANTAGE'] 
 
-export const computeScore = (player, opposition) => {
+export const computeScore = (player, opposition, playerPoints, oppositionPoints) => {
 
-  let playerIndex = gamePoints.indexOf(player);
-  let oppositionIndex = gamePoints.indexOf(opposition)
+  const playerIndex = gamePoints.indexOf(playerPoints);
+  const oppositionIndex = gamePoints.indexOf(oppositionPoints)
 
-  if (playerIndex === 4 && oppositionIndex === 3) {
-    let result = 'WINNER';
+  const winningScore = ((playerIndex === 4 && oppositionIndex === 3) || (playerIndex === 3 && oppositionIndex < 3))
+  const resetScore = (playerPoints === 'WINNER' || playerPoints === 'LOSER')
+  const loseAdvantage = (oppositionIndex === 4 && playerIndex === 3)
+  const normalScore = ((playerIndex < 3 && oppositionIndex <= 3) || (playerIndex === 3 && oppositionIndex === 3))
+
+  let result;
+
+  if (resetScore) {
+    result = { ['player' + player]: gamePoints[0], 
+        ['player' + opposition]: gamePoints[0] };
+    return result; 
+  }
+  if (winningScore) {
+    result = { ['player' + player]: 'WINNER', 
+        ['player' + opposition]: 'LOSER' };
     return result;
   }
-  if (oppositionIndex === 4 && playerIndex === 3) {
-    let result = gamePoints[oppositionIndex - 1];
+  if (loseAdvantage) {
+    result = { ['player' + player]: playerPoints, 
+        ['player' + opposition]: gamePoints[oppositionIndex - 1] }
     return result;
   }
-  if (playerIndex < 3 && oppositionIndex <= 3) {
-    let result = gamePoints[playerIndex + 1];
-    return result;
-  }
-  if (playerIndex === 3 && oppositionIndex < 3) {
-    let result = 'WINNER';
-    return result;
-  }
-  if (playerIndex === 3 && oppositionIndex === 3) {
-    let result = gamePoints[playerIndex + 1];
+  if (normalScore) {
+    result = { ['player' + player]: gamePoints[playerIndex + 1], 
+    ['player' + opposition]: oppositionPoints };
     return result;
   }
 }
