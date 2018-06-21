@@ -13,7 +13,7 @@ export const computeScore = (player, opposition, playerPoints, oppositionPoints)
   let result;
 
   if (resetScore) {
-    result = { ['player' + player]: gamePoints[0], 
+    result = { ['player' + player]: gamePoints[1], 
         ['player' + opposition]: gamePoints[0] };
     return result; 
   }
