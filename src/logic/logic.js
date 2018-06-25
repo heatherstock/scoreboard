@@ -27,43 +27,52 @@ export const computeScore = (player, score) => {
 
   let result;
 
-  if (setPoint && gamePoint) {
-    result = { 
-      game: { ['player' + player]: 'WINNER', 
-      ['player' + opposition]: 'LOSER' },
-
-      set: { ['player' + player]: 0,
-      ['player' + opposition]: 0  },
-
-      match: { ['player' + player]: playerMatch + 1, 
-      ['player' + opposition]: oppositionMatch }
-    };
-    return result;
-  }
-
-  if (gamePoint && !setPoint) {
-    result = { game: { ['player' + player]: 'WINNER', 
+  switch (true) {
+    case (setPoint && gamePoint):
+      result = { 
+        game: { ['player' + player]: 'WINNER', 
         ['player' + opposition]: 'LOSER' },
-      set: { ['player' + player]: playerSet + 1, 
-        ['player' + opposition]: oppositionSet }};
-    return result;
-  }
 
-  if (gameWon) {
-    result = { game: { ['player' + player]: gamePoints[1], 
-        ['player' + opposition]: gamePoints[0] }};
-    return result; 
-  }
+        set: { ['player' + player]: 0,
+        ['player' + opposition]: 0  },
 
-  if (scoreAgainstAdvantage) {
-    result = { game: { ['player' + player]: playerCurrentPoints, 
-        ['player' + opposition]: gamePoints[oppositionIndex - 1] }};
-    return result;
-  }
+        match: { ['player' + player]: playerMatch + 1, 
+        ['player' + opposition]: oppositionMatch }
+      };
+      return result;
 
-  if (normal) {
-    result = { game: { ['player' + player]: gamePoints[playerIndex + 1], 
-    ['player' + opposition]: oppositionCurrentPoints }};
-    return result;
-  }
-}
+    case (gamePoint && !setPoint):
+      result = { 
+        game: { ['player' + player]: 'WINNER', 
+        ['player' + opposition]: 'LOSER' },
+
+        set: { ['player' + player]: playerSet + 1, 
+        ['player' + opposition]: oppositionSet }
+      };
+      return result;
+
+    case gameWon:
+      result = { 
+        game: { ['player' + player]: gamePoints[1], 
+        ['player' + opposition]: gamePoints[0] }
+      };
+      return result; 
+
+    case scoreAgainstAdvantage:
+      result = { 
+        game: { ['player' + player]: playerCurrentPoints, 
+        ['player' + opposition]: gamePoints[oppositionIndex - 1] }
+      };
+      return result;
+
+    case normal:
+      result = { 
+        game: { ['player' + player]: gamePoints[playerIndex + 1], 
+        ['player' + opposition]: oppositionCurrentPoints }
+      };
+      return result;
+
+    default:
+      console.log('hmm');
+  };
+};
