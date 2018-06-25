@@ -76,5 +76,3 @@ export const computeScore = (player, score) => {
       console.log('hmm');
   };
 };
-
-// hello blah blah 
