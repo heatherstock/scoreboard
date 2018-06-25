@@ -4,7 +4,7 @@ import {computeScore} from '../src/logic/logic';
 import 'babel-polyfill';
 
 describe('computeScore', () => {
-  context('when a player scores a "normal" point (i.e. not deuce, advantage or at game point or set point)', () => {
+  context('current game score 15 all', () => {
     it('increases the score by the correct number of points', () => {
       let player = 1;
       let score = {
@@ -27,8 +27,8 @@ describe('computeScore', () => {
     });
   });
 
-  context('when a player scores a point at game point, but not set point', () => {
-    it('announces the winner after 40 points if not on deuce, and updates set', () => {
+  context('current game score 40 - 15. Not set point.', () => {
+    it('announces the winner and updates set', () => {
       let player = 1;
       let score = {
         game: {
@@ -51,8 +51,10 @@ describe('computeScore', () => {
             set: { player1: 1, player2: 0 }
         });
     });
+  });
 
-    it('increases score to advantage if on deuce', () => {
+  context('current game score deuce. Not set point.', () => {
+    it('increases score to advantage', () => {
       let player = 1;
       let score = {
         game: {
@@ -73,7 +75,8 @@ describe('computeScore', () => {
         .to.deep.equal({ game: { player1: 'ADVANTAGE', player2: 40 }});
     });
 
-    it('announces the winner after winning advantage and updates set', () => {
+  context('current game score player advantage. Not set point.', () => {
+    it('announces the winner and updates set', () => {
       let player = 1;
       let score = {
         game: {
@@ -96,8 +99,10 @@ describe('computeScore', () => {
           set: { player1: 1, player2: 0 }
         });
     });
+  });
 
-    it('decreases the oppositions score if they had advantage', () => {
+  context('current game score opposition advantage. Not set point.', () => {
+    it('decreases the oppositions score (score will be deuce)', () => {
       let player = 1;
       let score = {
         game: {
@@ -117,8 +122,10 @@ describe('computeScore', () => {
       expect(computeScore(player, score))
         .to.deep.equal({ game: { player1: 40, player2: 40 }});
     });
+  });
 
-    it('resets the current game after the winner is announced (and awards the correct number of points)', () => {
+  context('currently displaying winner and loser of game', () => {
+    it('resets the current game and awards the correct number of points', () => {
       let player = 1;
       let score = {
         game: {
@@ -140,8 +147,8 @@ describe('computeScore', () => {
     });
   });
   
-  context('when approaching set point', () => {
-    it('updates sets won and resets scores if first to reach 6 points with 2 points above opposition', () => {
+  context('current game score 40 - 15. Set score 5 - 0 (i.e. game point and set point)', () => {
+    it('updates sets won and resets scores', () => {
       let player = 1;
       let score = {
         game: {
@@ -165,8 +172,10 @@ describe('computeScore', () => {
           match: { player1: 1, player2: 0 }
         });
     });
+  });
 
-    it('updates sets won and resets scores if above 6 points with 2 points above opposition', () => {
+  context('current game score 40 - 15. Set score 7 - 6 (i.e. game point and set point)', () => {
+    it('updates sets won and resets scores', () => {
       let player = 1;
       let score = {
         game: {
@@ -190,8 +199,10 @@ describe('computeScore', () => {
           match: { player1: 1, player2: 0 }
         });
     });
+  });
 
-    it('increases games won score if less than 6 points', () => {
+  context('current game score 40 - 15. Set score 3 - 0 (i.e. game point but not set point)', () => {
+    it('increases games won by 1', () => {
       let player = 1;
       let score = {
         game: {
@@ -214,8 +225,10 @@ describe('computeScore', () => {
           set: { player1: 4, player2: 0 }
         });
     });
+  });
 
-    it('increases games won score if 6 points or above, but not 2 points above opposition', () => {
+  context('current game score 40 - 15. Set score 6 - 6 (i.e. game point but not set point)', () => {
+    it('increases games won by 1', () => {
       let player = 1;
       let score = {
         game: {
@@ -237,6 +250,7 @@ describe('computeScore', () => {
           game: { player1: 'WINNER', player2: 'LOSER' },
           set: { player1: 7, player2: 6 }
         });
+      });
     });
   });
 });
