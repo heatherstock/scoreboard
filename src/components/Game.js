@@ -6,8 +6,18 @@ class Game extends Component {
   constructor() {
     super();
     this.state = {
-      player1: gamePoints[0],
-      player2: gamePoints[0]
+      game: {
+        player1: gamePoints[0],
+        player2: gamePoints[0]
+      },
+      set: {
+        player1: 0,
+        player2: 0
+      },
+      match: {
+        player1: 0,
+        player2: 0
+      }
     };
   }
 
@@ -16,15 +26,33 @@ class Game extends Component {
     this.setState(updatedPoints);
   }  
 
+  resetMatch = () => {
+    this.setState({
+      game: {
+        player1: gamePoints[0],
+        player2: gamePoints[0]
+      },
+      set: {
+        player1: 0,
+        player2: 0
+      },
+      match: {
+        player1: 0,
+        player2: 0
+      }
+    })
+  }
+
   render() {
     return (
       <div>
-        <h2>Game</h2>
-        <Player player={1} gameScore={this.state.player1} click={this.scorePoint} />
-        <Player player={2} gameScore={this.state.player2} click={this.scorePoint} />
+        <h2>Tennis</h2>
+        <Player player={1} score={this.state} click={this.scorePoint} />
+        <Player player={2} score={this.state} click={this.scorePoint} />
+        <button onClick={this.resetMatch}>Reset match</button>
       </div>
     );
-  };
+  }; 
 }
 
 export default Game;

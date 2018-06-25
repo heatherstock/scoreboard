@@ -1,17 +1,20 @@
 export const gamePoints = [0, 15, 30, 40, 'ADVANTAGE'] 
 
-export const computeScore = (player, gameScore) => {
+export const computeScore = (player, score) => {
 
   const opposition = (player === 1) ? 2 : 1;
   
-  const playerPoints = gameScore['player' + player];
-  const oppositionPoints = gameScore['player' + opposition];
+  //get current points from state passed down as argument
+  const playerCurrentPoints = score.game['player' + player]
+  const oppositionCurrentPoints = score.game['player' + opposition]
+  
+  //get index of current points from gamePoints array (above) in order to do simple calculations (below)
+  const playerIndex = gamePoints.indexOf(playerCurrentPoints);
+  const oppositionIndex = gamePoints.indexOf(oppositionCurrentPoints)
 
-  const playerIndex = gamePoints.indexOf(playerPoints);
-  const oppositionIndex = gamePoints.indexOf(oppositionPoints);
-
+  //define key points in game
   const winningScore = ((playerIndex === 4 && oppositionIndex === 3) || (playerIndex === 3 && oppositionIndex < 3))
-  const resetScore = (playerPoints === 'WINNER' || playerPoints === 'LOSER')
+  const resetScore = (playerCurrentPoints === 'WINNER' || playerCurrentPoints === 'LOSER')
   const loseAdvantage = (oppositionIndex === 4 && playerIndex === 3)
   const normalScore = ((playerIndex < 3 && oppositionIndex <= 3) || (playerIndex === 3 && oppositionIndex === 3))
 
@@ -28,13 +31,13 @@ export const computeScore = (player, gameScore) => {
     return result;
   }
   if (loseAdvantage) {
-    result = { ['player' + player]: playerPoints, 
+    result = { ['player' + player]: playerCurrentPoints, 
         ['player' + opposition]: gamePoints[oppositionIndex - 1] }
     return result;
   }
   if (normalScore) {
     result = { ['player' + player]: gamePoints[playerIndex + 1], 
-    ['player' + opposition]: oppositionPoints };
+    ['player' + opposition]: oppositionCurrentPoints };
     return result;
   }
 }
