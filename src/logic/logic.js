@@ -1,9 +1,14 @@
 export const gamePoints = [0, 15, 30, 40, 'ADVANTAGE'] 
 
-export const computeScore = (player, opposition, playerPoints, oppositionPoints) => {
+export const computeScore = (player, gameScore) => {
+
+  const opposition = (player === 1) ? 2 : 1;
+  
+  const playerPoints = gameScore['player' + player];
+  const oppositionPoints = gameScore['player' + opposition];
 
   const playerIndex = gamePoints.indexOf(playerPoints);
-  const oppositionIndex = gamePoints.indexOf(oppositionPoints)
+  const oppositionIndex = gamePoints.indexOf(oppositionPoints);
 
   const winningScore = ((playerIndex === 4 && oppositionIndex === 3) || (playerIndex === 3 && oppositionIndex < 3))
   const resetScore = (playerPoints === 'WINNER' || playerPoints === 'LOSER')
