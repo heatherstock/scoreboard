@@ -1,7 +1,8 @@
 import React from 'react';
+export const gamePoints = [0, 15, 30, 40, 'ADVANTAGE'];
 
 const Player = ({ player, score, click }) => {
-  const gameScore = score.game['player' + player];
+  const gameScore = gamePoints[score.game['player' + player]];
   const setScore = score.set['player' + player];
   const matchScore = score.match['player' + player];
 

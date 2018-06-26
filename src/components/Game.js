@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Player from './Player';
-import { computeScore, initialState } from '../logic/logic';
+import { computeScore, initialState } from '../logic';
 
 class Game extends Component {
   constructor() {
@@ -11,11 +11,11 @@ class Game extends Component {
   scorePoint = (player) => {
     const updatedPoints = computeScore(player, this.state);
     this.setState(updatedPoints);
-  }  
+  };
 
   resetMatch = () => {
     this.setState(initialState)
-  }
+  };
 
   render() {
     return (
