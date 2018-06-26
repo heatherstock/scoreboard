@@ -1,4 +1,19 @@
-export const gamePoints = [0, 15, 30, 40, 'ADVANTAGE'] 
+export const gamePoints = [0, 15, 30, 40, 'ADVANTAGE'];
+
+export const initialState = {
+  game: {
+    player1: gamePoints[0],
+    player2: gamePoints[0]
+  },
+  set: {
+    player1: 0,
+    player2: 0
+  },
+  match: {
+    player1: 0,
+    player2: 0
+  }
+};
 
 export const computeScore = (player, score) => {
 

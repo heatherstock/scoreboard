@@ -1,24 +1,11 @@
 import React, { Component } from 'react';
 import Player from './Player';
-import { gamePoints, computeScore } from '../logic/logic';
+import { computeScore, initialState } from '../logic/logic';
 
 class Game extends Component {
   constructor() {
     super();
-    this.state = {
-      game: {
-        player1: gamePoints[0],
-        player2: gamePoints[0]
-      },
-      set: {
-        player1: 0,
-        player2: 0
-      },
-      match: {
-        player1: 0,
-        player2: 0
-      }
-    };
+    this.state = initialState;
   }
 
   scorePoint = (player) => {
@@ -27,20 +14,7 @@ class Game extends Component {
   }  
 
   resetMatch = () => {
-    this.setState({
-      game: {
-        player1: gamePoints[0],
-        player2: gamePoints[0]
-      },
-      set: {
-        player1: 0,
-        player2: 0
-      },
-      match: {
-        player1: 0,
-        player2: 0
-      }
-    })
+    this.setState(initialState)
   }
 
   render() {
